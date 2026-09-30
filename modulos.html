@@ -1,0 +1,304 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="icon" type="image/png" href="assets/images/LOGO_U.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Net-U App - Módulos</title>
+
+    <style>
+        /* ================= VARIABLES ================= */
+        :root {
+            --bg-app: #F8FAFC;
+            --bg-card: #FFFFFF;
+            --text-main: #0F172A;
+            --text-muted: #475569;
+            --rbuu-blue: #2563EB;
+            --rbuu-green: #16A34A;
+            --rbuu-orange: #EA580C;
+            --rbuu-yellow: #EAB308;
+            --rbuu-dark: #1E3A8A;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #E2E8F0;
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+        }
+
+        /* ================= HEADER ================= */
+        .top-header {
+            background-color: var(--bg-card);
+            width: 100%;
+            max-width: 480px;
+            height: 60px;
+            position: fixed;
+            top: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 16px;
+            z-index: 1000;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-back {
+            text-decoration: none;
+            color: var(--rbuu-blue);
+            font-weight: 600;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .header-title {
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--text-main);
+            letter-spacing: 0.5px;
+            text-align: center;
+            flex: 1;
+        }
+
+        .btn-lang {
+            background-color: #F1F5F9;
+            color: var(--rbuu-blue);
+            border: none;
+            padding: 6px 10px;
+            font-size: 12px;
+            font-weight: 700;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        /* ================= CUERPO PRINCIPAL ================= */
+        .app-content {
+            width: 100%;
+            max-width: 480px;
+            background-color: var(--bg-app);
+            margin-top: 60px;
+            margin-bottom: 70px;
+            padding: 24px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            overflow-y: auto;
+        }
+
+        .intro-box {
+            background-color: #E0E7FF;
+            border-radius: 12px;
+            padding: 16px;
+        }
+
+            .intro-box h3 {
+                font-size: 12px;
+                color: var(--rbuu-blue);
+                margin-bottom: 4px;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+            }
+
+            .intro-box p {
+                font-size: 14px;
+                color: var(--text-main);
+                font-weight: 500;
+            }
+
+        /* ================= TARJETAS DE MÓDULOS ================= */
+        .modules-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .module-card {
+            background-color: var(--bg-card);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: var(--shadow-sm);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            display: block;
+        }
+
+            .module-card:active {
+                transform: scale(0.98);
+            }
+
+        .module-title {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+        }
+
+        .module-topics {
+            list-style-type: decimal;
+            padding-left: 20px;
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .mod-1 {
+            border-left: 6px solid var(--rbuu-blue);
+        }
+
+        .mod-2 {
+            border-left: 6px solid var(--rbuu-green);
+        }
+
+        .mod-3 {
+            border-left: 6px solid var(--rbuu-orange);
+        }
+
+        .mod-4 {
+            border-left: 6px solid var(--rbuu-yellow);
+        }
+
+        .mod-5 {
+            border-left: 6px solid var(--rbuu-dark);
+        }
+
+        /* ================= NAVEGACIÓN INFERIOR ================= */
+        .bottom-nav {
+            background-color: var(--bg-card);
+            width: 100%;
+            max-width: 480px;
+            height: 70px;
+            position: fixed;
+            bottom: 0;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+        }
+
+        .nav-item {
+            text-decoration: none;
+            color: var(--text-muted);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            width: 33%;
+        }
+
+            .nav-item.active {
+                color: var(--rbuu-blue);
+            }
+
+        .icon-placeholder {
+            font-size: 22px;
+            filter: grayscale(100%);
+            opacity: 0.6;
+        }
+
+        .nav-item.active .icon-placeholder {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="top-header">
+        <a href="index.html" class="btn-back" data-i18n="nav_volver">
+            <span style="font-size: 18px;">←</span> Volver
+        </a>
+        <h1 class="header-title" data-i18n="tit_header_modulos">MÓDULOS NET-U</h1>
+        <!-- ID agregado para que funcione el JS -->
+        <button id="btn-traduccion" class="btn-lang" data-i18n="btn_lang">ES / EN</button>
+    </header>
+
+    <main class="app-content">
+
+        <div class="intro-box">
+            <h3 data-i18n="ruta_tit">Ruta de Aprendizaje</h3>
+            <p data-i18n="ruta_desc">Selecciona un módulo interactivo para comenzar:</p>
+        </div>
+
+        <div class="modules-list">
+
+            <!-- Módulo 1 -->
+            <a href="modulo1.html" class="module-card mod-1">
+                <h2 class="module-title" data-i18n="tit_mod_1">MÓDULO 1: SALUD VISUAL & PANTALLA</h2>
+                <ol class="module-topics">
+                    <li data-i18n="mod1_t1">Regla 20-20-20</li>
+                    <li data-i18n="mod1_t2">Luz azul y sueño</li>
+                </ol>
+            </a>
+
+            <!-- Módulo 2 -->
+            <a href="modulo2.html" class="module-card mod-2">
+                <h2 class="module-title" data-i18n="tit_mod_2">MÓDULO 2: HÁBITOS & POSTURA</h2>
+                <ol class="module-topics">
+                    <li data-i18n="mod2_t1">Ergonomía en escritorio</li>
+                    <li data-i18n="mod2_t2">Pausas activas</li>
+                </ol>
+            </a>
+
+            <!-- Módulo 3 -->
+            <a href="modulo3.html" class="module-card mod-3">
+                <h2 class="module-title" data-i18n="tit_mod_3">MÓDULO 3: GESTIÓN DEL TIEMPO</h2>
+                <ol class="module-topics">
+                    <li data-i18n="mod3_t1">Técnica Pomodoro</li>
+                    <li data-i18n="mod3_t2">Matriz Eisenhower</li>
+                </ol>
+            </a>
+
+            <!-- Módulo 4 -->
+            <a href="modulo4.html" class="module-card mod-4">
+                <h2 class="module-title" data-i18n="tit_mod_4">MÓDULO 4: PRIVACIDAD & CIBERSEGURIDAD</h2>
+                <ol class="module-topics">
+                    <li data-i18n="mod4_t1">Detección de Phishing</li>
+                    <li data-i18n="mod4_t2">Contraseñas y 2FA</li>
+                </ol>
+            </a>
+
+            <!-- Módulo 5 -->
+            <a href="modulo5.html" class="module-card mod-5">
+                <h2 class="module-title" data-i18n="tit_mod_5">MÓDULO 5: SALUD MENTAL Y APOYO</h2>
+                <ol class="module-topics">
+                    <li data-i18n="mod5_t1">Manejo del Estrés (Zona Calma)</li>
+                    <li data-i18n="mod5_t2">Evaluación de Redes de Apoyo</li>
+                </ol>
+            </a>
+
+        </div>
+    </main>
+
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <span class="icon-placeholder">🏠</span>
+            <span style="font-size: 10px; font-weight: 600; margin-top: 4px;" data-i18n="nav_inicio">Inicio</span>
+        </a>
+        <a href="modulos.html" class="nav-item active">
+            <span class="icon-placeholder">📚</span>
+            <span style="font-size: 10px; font-weight: 600; margin-top: 4px;" data-i18n="nav_modulos">Módulos</span>
+        </a>
+        <a href="creditos.html" class="nav-item">
+            <span class="icon-placeholder">ℹ️</span>
+            <span style="font-size: 10px; font-weight: 600; margin-top: 4px;" data-i18n="nav_creditos">Créditos</span>
+        </a>
+    </nav>
+
+    <!-- Importante: Llamar al script de traducción al final -->
+    <script src="traduccion.js"></script>
+</body>
+</html>

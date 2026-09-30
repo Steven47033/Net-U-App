@@ -1,0 +1,345 @@
+/* ================= VARIABLES RBUU & BASE ================= */
+:root {
+    --bg-app: #F8FAFC; /* Fondo general claro */
+    --bg-card: #FFFFFF; /* Fondo de tarjetas blanco */
+    --text-main: #0F172A; /* Texto principal oscuro */
+    --text-muted: #475569; /* Texto secundario gris */
+    /* Colores Identidad RBUU */
+    --rbuu-blue: #2563EB;
+    --rbuu-green: #16A34A;
+    --rbuu-orange: #EA580C;
+    --rbuu-yellow: #EAB308;
+    /* Sombras modernas */
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* ================= RESETEO BÁSICO ================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: #E2E8F0; /* Fondo gris fuera de la app (para PC) */
+    color: var(--text-main);
+    display: flex;
+    justify-content: center;
+}
+
+html, body {
+    height: 100%;
+}
+
+/* ================= HEADER ================= */
+.top-header {
+    background-color: var(--bg-card);
+    width: 100%;
+    max-width: 480px;
+    height: 60px;
+    position: fixed;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    z-index: 1000;
+    box-shadow: var(--shadow-sm);
+}
+
+.logo-box {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100%;
+    text-decoration: none; /* Quita la línea si es un enlace */
+    overflow: hidden; /* Evita que la imagen se desborde del header */
+}
+
+.logo-img {
+    height: 40px; /* Este es el alto exacto para que encaje en el header */
+    max-width: 140px; /* Un tope de ancho para que no empuje el botón de ES/EN */
+    width: auto; /* Mantiene la proporción para que no se deforme */
+    object-fit: contain; /* Asegura que toda la imagen se vea dentro de su espacio */
+}
+
+.btn-lang {
+    background-color: #F1F5F9;
+    color: var(--rbuu-blue);
+    border: none;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+    .btn-lang:hover {
+        background-color: #E2E8F0;
+    }
+
+/* ================= CUERPO DE LA APP ================= */
+.app-content {
+    width: 100%;
+    max-width: 480px;
+    background-color: var(--bg-app);
+    margin-top: 60px;
+    margin-bottom: 70px;
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    overflow-y: auto;
+}
+
+.welcome-text h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 6px;
+}
+
+.welcome-text p {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+/* ================= BANNER HERO (AZUL) ================= */
+.hero-banner {
+    width: 100%;
+    border-radius: 16px;
+    overflow: hidden; /* Esto obliga a la imagen a tener las esquinas redondas */
+    box-shadow: var(--shadow-md);
+    display: flex;
+}
+
+.banner-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover; /* Evita que la imagen se deforme */
+}
+
+.banner-content h3 {
+    font-size: 18px;
+    margin-bottom: 4px;
+}
+
+.banner-content p {
+    font-size: 13px;
+    opacity: 0.9;
+}
+
+/* ================= BOTONES PRINCIPALES ================= */
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.btn-primary, .btn-secondary {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 700;
+    transition: transform 0.1s, box-shadow 0.2s;
+    border: none;
+}
+
+.btn-primary {
+    background-color: var(--rbuu-blue);
+    color: #ffffff;
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+}
+
+    .btn-primary:active {
+        transform: scale(0.98);
+    }
+
+.btn-subtext {
+    font-size: 11px;
+    font-weight: 400;
+    opacity: 0.8;
+}
+
+.btn-secondary {
+    background-color: var(--bg-card);
+    color: var(--rbuu-blue);
+    border: 2px solid var(--rbuu-blue);
+}
+
+/* ================= ATAJOS (TARJETAS) ================= */
+
+
+.shortcuts-grid {
+    display: flex;
+    gap: 16px;
+    perspective: 1000px; /* Esto crea la profundidad 3D */
+}
+
+.flip-card {
+    flex: 1;
+    height: 120px;
+    cursor: pointer;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+    transform-style: preserve-3d;
+}
+
+/* Esta es la clase que aplicaremos con JavaScript para girarla */
+.flip-card.is-flipped .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+/* Aquí está el truco: top 0 y left 0 las superpone */
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 16px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    background-color: #FFFFFF;
+}
+
+.flip-card-back {
+    transform: rotateY(180deg);
+    background-color: #F1F5F9;
+}
+
+.card-green {
+    border-top: 5px solid #16A34A;
+}
+
+.card-orange {
+    border-top: 5px solid #EA580C;
+}
+
+.shortcut-icon {
+    font-size: 28px;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.flip-card-front p {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+    .shortcut-card:active {
+        transform: translateY(2px);
+    }
+
+.shortcut-icon {
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.shortcut-card p {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+
+.card-orange {
+    border-top: 4px solid var(--rbuu-orange);
+}
+
+/* ================= TIP DEL DÍA (AMARILLO) ================= */
+.daily-tip {
+    background-color: #FEFCE8; /* Amarillo muy suave */
+    border: 1px solid #FEF08A;
+    border-left: 4px solid var(--rbuu-yellow);
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: var(--shadow-sm);
+}
+
+.tip-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+    .tip-header h3 {
+        font-size: 13px;
+        font-weight: 700;
+        color: #854D0E;
+    }
+
+.daily-tip p {
+    font-size: 13px;
+    color: #A16207;
+    line-height: 1.5;
+    font-style: italic;
+}
+
+/* ================= NAVEGACIÓN INFERIOR ================= */
+.bottom-nav {
+    background-color: var(--bg-card);
+    width: 100%;
+    max-width: 480px;
+    height: 70px;
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 1000;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+}
+
+.nav-item {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    flex: 1;
+}
+
+    .nav-item.active {
+        color: var(--rbuu-blue);
+    }
+
+.icon-placeholder {
+    font-size: 22px;
+    filter: grayscale(100%);
+    opacity: 0.6;
+}
+
+.nav-item.active .icon-placeholder {
+    filter: grayscale(0%);
+    opacity: 1;
+}
+
+.nav-label {
+    font-size: 10px;
+    font-weight: 600;
+}

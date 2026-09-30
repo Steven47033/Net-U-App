@@ -1,0 +1,276 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="icon" type="image/png" href="assets/images/LOGO_U.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Net-U App - Perfil</title>
+    <style>
+        :root {
+            --bg-app: #F8FAFC;
+            --bg-card: #FFFFFF;
+            --text-main: #0F172A;
+            --text-muted: #475569;
+            --rbuu-blue: #2563EB;
+            --rbuu-green: #16A34A;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #E2E8F0;
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+        }
+
+        .top-header {
+            background-color: var(--bg-card);
+            width: 100%;
+            max-width: 480px;
+            height: 60px;
+            position: fixed;
+            top: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 16px;
+            z-index: 1000;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-back {
+            text-decoration: none;
+            color: var(--rbuu-blue);
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .header-title {
+            font-size: 15px;
+            font-weight: 800;
+            text-align: center;
+            flex: 1;
+        }
+
+        .btn-lang {
+            background-color: #F1F5F9;
+            color: var(--rbuu-blue);
+            border: none;
+            padding: 6px 10px;
+            font-size: 12px;
+            font-weight: 700;
+            border-radius: 20px;
+        }
+
+        .app-content {
+            width: 100%;
+            max-width: 480px;
+            background-color: var(--bg-app);
+            margin-top: 60px;
+            margin-bottom: 70px;
+            padding: 24px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .profile-card {
+            background-color: var(--bg-card);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+        }
+
+        .avatar-display {
+            font-size: 60px;
+            margin-bottom: 12px;
+        }
+
+        .input-name {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #E2E8F0;
+            border-radius: 12px;
+            font-size: 16px;
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 600;
+            color: var(--text-main);
+            outline: none;
+        }
+
+            .input-name:focus {
+                border-color: var(--rbuu-blue);
+            }
+
+        .avatar-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .avatar-option {
+            font-size: 28px;
+            background-color: #F1F5F9;
+            border: 2px solid transparent;
+            border-radius: 12px;
+            padding: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+            .avatar-option.selected {
+                border-color: var(--rbuu-blue);
+                background-color: #EFF6FF;
+            }
+
+        .btn-save {
+            background-color: var(--rbuu-blue);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .save-msg {
+            display: none;
+            background-color: #DCFCE7;
+            color: var(--rbuu-green);
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-top: 12px;
+        }
+
+        /* Navegación Inferior (Ajustada a 4 íconos) */
+        .bottom-nav {
+            background-color: var(--bg-card);
+            width: 100%;
+            max-width: 480px;
+            height: 70px;
+            position: fixed;
+            bottom: 0;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+        }
+
+        .nav-item {
+            text-decoration: none;
+            color: var(--text-muted);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 25%;
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+            .nav-item.active {
+                color: var(--rbuu-blue);
+            }
+
+        .icon-placeholder {
+            font-size: 22px;
+            filter: grayscale(100%);
+            opacity: 0.6;
+            margin-bottom: 4px;
+        }
+
+        .nav-item.active .icon-placeholder {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <header class="top-header">
+        <a href="index.html" class="btn-back" data-i18n="nav_volver">← Volver</a>
+        <h1 class="header-title" data-i18n="p_header">MI PERFIL</h1>
+        <button id="btn-traduccion" class="btn-lang" data-i18n="btn_lang">ES / EN</button>
+    </header>
+
+    <main class="app-content">
+        <div class="profile-card">
+            <h3 style="margin-bottom: 16px; color: var(--text-muted);" data-i18n="p_title">Personaliza tu experiencia</h3>
+
+            <div class="avatar-display" id="current-avatar">👤</div>
+
+            <input type="text" id="user-name" class="input-name" placeholder="Tu nombre / Your name">
+
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px; text-align: left;" data-i18n="p_avatar_lbl">Selecciona tu avatar:</p>
+            <div class="avatar-grid">
+                <div class="avatar-option" onclick="selectAvatar(this, '👩‍💻')">👩‍💻</div>
+                <div class="avatar-option" onclick="selectAvatar(this, '🧑‍💻')">🧑‍💻</div>
+                <div class="avatar-option" onclick="selectAvatar(this, '🦊')">🦊</div>
+                <div class="avatar-option" onclick="selectAvatar(this, '🐱')">🐱</div>
+            </div>
+
+            <button class="btn-save" onclick="saveProfile()" data-i18n="p_btn_save">Guardar Cambios</button>
+            <div class="save-msg" id="save-msg" data-i18n="p_msg_save">¡Perfil actualizado correctamente!</div>
+        </div>
+    </main>
+
+    <!-- Barra de Navegación de 4 Íconos -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <span class="icon-placeholder">🏠</span><span data-i18n="nav_inicio">Inicio</span>
+        </a>
+        <a href="modulos.html" class="nav-item">
+            <span class="icon-placeholder">📚</span><span data-i18n="nav_modulos">Módulos</span>
+        </a>
+        <a href="creditos.html" class="nav-item">
+            <span class="icon-placeholder">ℹ️</span><span data-i18n="nav_creditos">Créditos</span>
+        </a>
+    </nav>
+
+    <script src="traduccion.js"></script>
+    <script>
+        let selectedAvatar = '👤';
+
+        function selectAvatar(element, emoji) {
+            document.querySelectorAll('.avatar-option').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+            selectedAvatar = emoji;
+            document.getElementById('current-avatar').textContent = emoji;
+        }
+
+        function saveProfile() {
+            const name = document.getElementById('user-name').value;
+            localStorage.setItem('netu_nombre', name);
+            localStorage.setItem('netu_avatar', selectedAvatar);
+
+            const msg = document.getElementById('save-msg');
+            msg.style.display = 'block';
+            setTimeout(() => msg.style.display = 'none', 3000);
+        }
+
+        // Cargar datos al iniciar
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedName = localStorage.getItem('netu_nombre');
+            const savedAvatar = localStorage.getItem('netu_avatar');
+
+            if(savedName) document.getElementById('user-name').value = savedName;
+            if(savedAvatar) {
+                selectedAvatar = savedAvatar;
+                document.getElementById('current-avatar').textContent = savedAvatar;
+            }
+        });
+    </script>
+</body>
+</html>

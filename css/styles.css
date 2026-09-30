@@ -1,0 +1,175 @@
+/* Reseteo básico y tipografía */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #d9d9d9; /* Gris claro del wireframe */
+    color: #000;
+    display: flex;
+    justify-content: center; /* Centra la app en pantallas grandes */
+}
+
+/* Contenedor que simula la pantalla del móvil */
+html, body {
+    height: 100%;
+}
+
+/* ================= HEADER ================= */
+.top-header {
+    background-color: #000;
+    width: 100%;
+    max-width: 480px; /* Ancho máximo de celular */
+    height: 60px;
+    position: fixed;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px;
+    z-index: 1000;
+}
+
+.logo-box {
+    background-color: #d9d9d9;
+    width: 120px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #000;
+}
+
+.logo-text {
+    font-size: 10px;
+    color: #000;
+}
+
+.btn-lang {
+    background-color: #d9d9d9;
+    border: none;
+    padding: 8px 12px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* ================= CUERPO ================= */
+.app-content {
+    width: 100%;
+    max-width: 480px;
+    background-color: #d9d9d9;
+    margin-top: 60px; /* Espacio para el header fijo */
+    margin-bottom: 70px; /* Espacio para el menú inferior fijo */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px; /* Separación uniforme entre bloques */
+}
+
+.welcome-text h2 {
+    font-size: 14px;
+    font-weight: normal;
+    margin-bottom: 10px;
+}
+
+.welcome-text p {
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+/* Cajas Negras Placeholder */
+.hero-banner {
+    background-color: #000;
+    color: #fff;
+    width: 100%;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+}
+
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.btn-primary, .btn-secondary {
+    background-color: #000;
+    color: #fff;
+    border: none;
+    width: 180px;
+    padding: 12px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn-subtext {
+    font-size: 10px;
+    font-weight: normal;
+}
+
+.shortcuts-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.shortcut-card {
+    background-color: #000;
+    color: #fff;
+    flex: 1;
+    aspect-ratio: 1 / 1; /* Las hace cuadradas */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 12px;
+    padding: 10px;
+}
+
+.daily-tip h3 {
+    font-size: 14px;
+    font-weight: normal;
+    margin-bottom: 10px;
+}
+
+.daily-tip p {
+    font-size: 14px;
+}
+
+/* ================= FOOTER ================= */
+.bottom-nav {
+    background-color: #000;
+    width: 100%;
+    max-width: 480px;
+    height: 70px;
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 1000;
+}
+
+.nav-item {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 30px; /* Tamaño temporal para los emojis */
+    cursor: pointer;
+    background-color: #fff;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

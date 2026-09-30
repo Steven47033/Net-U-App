@@ -1,0 +1,524 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="icon" type="image/png" href="assets/images/LOGO_U.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Net-U App - Módulo 4</title>
+
+    <style>
+        /* ================= VARIABLES Y BASE ================= */
+        :root {
+            --bg-app: #F8FAFC;
+            --bg-card: #FFFFFF;
+            --text-main: #0F172A;
+            --text-muted: #475569;
+            --rbuu-blue: #2563EB;
+            --rbuu-green: #16A34A;
+            --rbuu-orange: #EA580C;
+            --rbuu-yellow: #EAB308;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #E2E8F0;
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+        }
+
+        /* ================= HEADER ================= */
+        .top-header {
+            background-color: var(--rbuu-yellow);
+            width: 100%;
+            max-width: 480px;
+            height: 60px;
+            position: fixed;
+            top: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 16px;
+            z-index: 1000;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-back, .header-title {
+            color: var(--text-main);
+        }
+
+        .btn-back {
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .header-title {
+            font-size: 15px;
+            font-weight: 800;
+            text-align: center;
+            flex: 1;
+        }
+
+        .btn-lang {
+            background-color: #F1F5F9;
+            color: #B45309;
+            border: none;
+            padding: 6px 10px;
+            font-size: 12px;
+            font-weight: 700;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        /* ================= CUERPO PRINCIPAL ================= */
+        .app-content {
+            width: 100%;
+            max-width: 480px;
+            background-color: var(--bg-app);
+            margin-top: 60px;
+            margin-bottom: 70px;
+            padding: 24px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            overflow-y: auto;
+        }
+
+        .module-intro h2 {
+            font-size: 18px;
+            color: #B45309;
+            margin-bottom: 8px;
+        }
+
+        .module-intro p {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* ================= TARJETAS INTERACTIVAS ================= */
+        .interactive-card {
+            background-color: var(--bg-card);
+            border-radius: 16px;
+            padding: 24px 20px;
+            box-shadow: var(--shadow-sm);
+        }
+
+            .interactive-card h3 {
+                font-size: 15px;
+                color: var(--text-main);
+                margin-bottom: 16px;
+                text-align: center;
+            }
+
+        /* --- INTERACCIÓN 1: SIMULADOR PHISHING --- */
+        .email-mockup {
+            background-color: #F1F5F9;
+            border: 1px solid #CBD5E1;
+            border-radius: 8px;
+            padding: 16px;
+            font-size: 13px;
+            line-height: 1.5;
+            margin-bottom: 16px;
+            color: var(--text-main);
+            transition: all 0.3s;
+        }
+
+            .email-mockup p {
+                margin-bottom: 8px;
+            }
+
+                .email-mockup p:last-child {
+                    margin-bottom: 0;
+                }
+
+        .flag-text {
+            transition: all 0.3s;
+        }
+
+        .flag-active {
+            background-color: #FCA5A5;
+            color: #7F1D1D;
+            font-weight: bold;
+            padding: 0 4px;
+            border-radius: 4px;
+            text-decoration: line-through;
+        }
+
+        .action-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .btn-phishing, .btn-safe {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 13px;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+
+            .btn-phishing:active, .btn-safe:active {
+                transform: scale(0.95);
+            }
+
+        .btn-safe {
+            background-color: var(--rbuu-green);
+        }
+
+        .btn-phishing {
+            background-color: #EF4444;
+        }
+
+        .phishing-feedback {
+            display: none;
+            background-color: #FEF2F2;
+            border-left: 4px solid #EF4444;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #991B1B;
+            animation: popIn 0.3s ease;
+        }
+
+            .phishing-feedback ul {
+                margin-top: 8px;
+                padding-left: 20px;
+            }
+
+            .phishing-feedback li {
+                margin-bottom: 4px;
+            }
+
+        /* --- INTERACCIÓN 2: CREADOR DE CONTRASEÑAS & 2FA --- */
+        .pwd-display {
+            background-color: #E2E8F0;
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            margin-bottom: 16px;
+            transition: all 0.4s;
+        }
+
+            .pwd-display.strong {
+                background-color: #DCFCE7;
+                border: 2px solid var(--rbuu-green);
+            }
+
+        .pwd-status {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .pwd-text {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            font-family: monospace;
+        }
+
+        .strong .pwd-status {
+            color: var(--rbuu-green);
+        }
+
+        .pwd-blocks {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .btn-block {
+            flex: 1;
+            background-color: #F8FAFC;
+            border: 2px solid #CBD5E1;
+            padding: 10px 4px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-main);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+            .btn-block.used {
+                background-color: var(--rbuu-blue);
+                color: white;
+                border-color: var(--rbuu-blue);
+                pointer-events: none;
+            }
+
+        .btn-2fa {
+            display: none;
+            width: 100%;
+            background-color: var(--rbuu-orange);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            animation: popIn 0.4s ease;
+            box-shadow: 0 4px 10px rgba(234, 88, 12, 0.3);
+        }
+
+        .sms-box {
+            display: none;
+            background-color: #F8FAFC;
+            border: 1px solid #CBD5E1;
+            border-radius: 16px;
+            padding: 16px;
+            margin-top: 16px;
+            animation: popIn 0.4s ease;
+            position: relative;
+        }
+
+        @keyframes popIn {
+            from {
+                transform: translateY(10px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* ================= NAVEGACIÓN INFERIOR ================= */
+        .bottom-nav {
+            background-color: var(--bg-card);
+            width: 100%;
+            max-width: 480px;
+            height: 70px;
+            position: fixed;
+            bottom: 0;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+        }
+
+        .nav-item {
+            text-decoration: none;
+            color: var(--text-muted);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            width: 33%;
+        }
+
+            .nav-item.active {
+                color: var(--rbuu-blue);
+            }
+
+        .icon-placeholder {
+            font-size: 22px;
+            filter: grayscale(100%);
+            opacity: 0.6;
+        }
+
+        .nav-item.active .icon-placeholder {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="top-header">
+        <a href="modulos.html" class="btn-back" data-i18n="nav_volver">
+            <span style="font-size: 18px;">←</span> Volver
+        </a>
+        <h1 class="header-title" data-i18n="m4_header_title">MÓDULO 4</h1>
+        <button id="btn-traduccion" class="btn-lang" data-i18n="btn_lang">ES / EN</button>
+    </header>
+
+    <main class="app-content">
+
+        <section class="module-intro">
+            <h2 data-i18n="m4_intro_title">Privacidad & Ciberseguridad</h2>
+            <p data-i18n="m4_intro_desc">Protege tus datos académicos y personales reconociendo amenazas digitales y creando barreras de seguridad sólidas.</p>
+        </section>
+
+        <!-- INTERACCIÓN 1: SIMULADOR PHISHING -->
+        <section class="interactive-card">
+            <h3 data-i18n="m4_i1_title">1. Simulador de Phishing</h3>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;" data-i18n="m4_phishing_desc">Lee el siguiente correo y decide si es real o una estafa:</p>
+
+            <div class="email-mockup" id="email-mockup">
+                <p><strong data-i18n="m4_mail_from">De:</strong> <span class="flag-text" id="f-domain">soporte-urgente@unad-verificacion.xyz</span></p>
+                <p><strong data-i18n="m4_mail_subject">Asunto:</strong> <span data-i18n="m4_mail_subj_txt">⚠️ AVISO: Bloqueo de cuenta institucional</span></p>
+                <hr style="margin: 8px 0; border: 0; border-top: 1px solid #CBD5E1;">
+                <p data-i18n="m4_mail_greet">Estimado estudiante,</p>
+                <p><span data-i18n="m4_mail_body_1">Hemos detectado actividad inusual. Tu cuenta será eliminada en</span> <span class="flag-text" id="f-urgency" data-i18n="m4_mail_body_2">12 horas</span>.</p>
+                <p data-i18n="m4_mail_body_3">Ingresa tus datos inmediatamente aquí:</p>
+                <p><span class="flag-text" id="f-link" style="color: #2563EB;">http://login-seguro-estudiantes-update.com</span></p>
+            </div>
+
+            <div class="action-row" id="phishing-actions">
+                <button class="btn-safe" onclick="checkPhishing(false)" data-i18n="m4_btn_safe">✅ Es Seguro</button>
+                <button class="btn-phishing" onclick="checkPhishing(true)" data-i18n="m4_btn_phish">🚨 Es Phishing</button>
+            </div>
+
+            <div class="phishing-feedback" id="phishing-feedback">
+                <strong data-i18n="m4_fb_title">¡Correcto! Evitaste el ataque.</strong>
+                <ul>
+                    <li><strong data-i18n="m4_fb_b1_t">Dominio falso:</strong> <span data-i18n="m4_fb_b1_d">La universidad usa .edu.co, no .xyz.</span></li>
+                    <li><strong data-i18n="m4_fb_b2_t">Tono de urgencia:</strong> <span data-i18n="m4_fb_b2_d">Te presionan con "12 horas" para asustarte.</span></li>
+                    <li><strong data-i18n="m4_fb_b3_t">Enlace dudoso:</strong> <span data-i18n="m4_fb_b3_d">No lleva al sitio oficial de la universidad.</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- INTERACCIÓN 2: CONTRASEÑAS Y 2FA -->
+        <section class="interactive-card" style="border-top: 5px solid var(--rbuu-yellow);">
+            <h3 data-i18n="m4_i2_title">2. Creador de Seguridad Total</h3>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;" data-i18n="m4_pwd_desc">Toca los bloques para construir una contraseña segura:</p>
+
+            <div class="pwd-display" id="pwd-display">
+                <div class="pwd-status" id="pwd-status" data-i18n="m4_pwd_weak">🔓 Estado: Débil</div>
+                <div class="pwd-text" id="pwd-text">_ _ _ _</div>
+            </div>
+
+            <div class="pwd-blocks" id="pwd-blocks">
+                <button class="btn-block" onclick="addBlock(this, 'NetU')">📝 <span data-i18n="m4_b_phrase">Frase</span><br>(NetU)</button>
+                <button class="btn-block" onclick="addBlock(this, '2026')">🔢 <span data-i18n="m4_b_nums">Números</span><br>(2026)</button>
+                <button class="btn-block" onclick="addBlock(this, '!*')">🔣 <span data-i18n="m4_b_symb">Símbolos</span><br>(!*)</button>
+            </div>
+
+            <p id="pwd-msg" style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px; display: none;" data-i18n="m4_pwd_success">
+                ¡Excelente! Mezclar estos elementos es mucho más seguro que usar fechas de cumpleaños. Pero falta el paso final:
+            </p>
+
+            <button class="btn-2fa" id="btn-2fa" onclick="activate2FA()" data-i18n="m4_btn_2fa">📲 Activar 2FA (Autenticador)</button>
+
+            <div class="sms-box" id="sms-box">
+                <p style="font-size: 11px; font-weight: 700; color: var(--text-muted); margin-bottom: 8px;" data-i18n="m4_sms_header">💬 Mensaje Nuevo (SMS)</p>
+                <p style="font-size: 15px; font-weight: bold; letter-spacing: 1px;"><span data-i18n="m4_sms_code_txt">Tu código Net-U es:</span> <span style="color: var(--rbuu-blue);">582-914</span></p>
+                <p style="font-size: 12px; color: var(--text-muted); margin-top: 8px;">
+                    <strong data-i18n="m4_sms_secure_txt">¡Cuenta protegida!</strong> <span data-i18n="m4_sms_secure_desc">Con el 2FA, aunque adivinen tu contraseña, no podrán entrar sin tu celular personal.</span>
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <span class="icon-placeholder">🏠</span>
+            <span style="font-size: 10px; font-weight: 600; margin-top: 4px;" data-i18n="nav_inicio">Inicio</span>
+        </a>
+        <a href="modulos.html" class="nav-item active">
+            <span class="icon-placeholder">📚</span>
+            <span style="font-size: 10px; font-weight: 600; margin-top: 4px;" data-i18n="nav_modulos">Módulos</span>
+        </a>
+        <a href="creditos.html" class="nav-item">
+            <span class="icon-placeholder">ℹ️</span>
+            <span style="font-size: 10px; font-weight: 600; margin-top: 4px;" data-i18n="nav_creditos">Créditos</span>
+        </a>
+    </nav>
+
+    <!-- SCRIPTS -->
+    <script src="traduccion.js"></script>
+    <script>
+        // Función auxiliar para leer del diccionario en las alertas
+        function getTranslation(key) {
+            const lang = localStorage.getItem('NetU_Idioma') || 'es';
+            if (typeof diccionario !== 'undefined' && diccionario[lang] && diccionario[lang][key]) {
+                return diccionario[lang][key];
+            }
+            return key;
+        }
+
+        function playDing() {
+            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            oscillator.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            oscillator.type = 'sine';
+            oscillator.frequency.setValueAtTime(880, audioCtx.currentTime);
+            gainNode.gain.setValueAtTime(1, audioCtx.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 1);
+            oscillator.start(audioCtx.currentTime);
+            oscillator.stop(audioCtx.currentTime + 1);
+        }
+
+        // ================= LÓGICA PHISHING =================
+        function checkPhishing(isPhishing) {
+            if (!isPhishing) {
+                alert(getTranslation('m4_alert_wrong'));
+                return;
+            }
+
+            playDing();
+            document.getElementById('phishing-actions').style.display = 'none';
+            document.getElementById('phishing-feedback').style.display = 'block';
+
+            document.getElementById('f-domain').classList.add('flag-active');
+            document.getElementById('f-urgency').classList.add('flag-active');
+            document.getElementById('f-link').classList.add('flag-active');
+        }
+
+        // ================= LÓGICA CONTRASEÑAS & 2FA =================
+        let currentPassword = "";
+        let blocksUsed = 0;
+
+        function addBlock(btnElement, text) {
+            btnElement.classList.add('used');
+            currentPassword += text;
+            blocksUsed++;
+
+            const pwdText = document.getElementById('pwd-text');
+            const pwdDisplay = document.getElementById('pwd-display');
+            const pwdStatus = document.getElementById('pwd-status');
+            const pwdMsg = document.getElementById('pwd-msg');
+            const btn2FA = document.getElementById('btn-2fa');
+
+            pwdText.textContent = currentPassword;
+
+            if (blocksUsed === 3) {
+                playDing();
+                pwdDisplay.classList.add('strong');
+                pwdStatus.setAttribute('data-i18n', 'm4_pwd_strong');
+                if (typeof aplicarIdioma === "function") aplicarIdioma();
+
+                pwdMsg.style.display = "block";
+                btn2FA.style.display = "block";
+            }
+        }
+
+        function activate2FA() {
+            playDing();
+            document.getElementById('btn-2fa').style.display = 'none';
+            document.getElementById('sms-box').style.display = 'block';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            localStorage.setItem('ultimoModuloGuardado', 'modulo4.html');
+        });
+    </script>
+</body>
+</html>

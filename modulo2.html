@@ -1,0 +1,461 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="icon" type="image/png" href="assets/images/LOGO_U.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Net-U App - Módulo 2</title>
+
+    <style>
+        /* ================= VARIABLES Y BASE ================= */
+        :root {
+            --bg-app: #F8FAFC;
+            --bg-card: #FFFFFF;
+            --text-main: #0F172A;
+            --text-muted: #475569;
+            --rbuu-blue: #2563EB;
+            --rbuu-green: #16A34A;
+            --rbuu-orange: #EA580C;
+            --rbuu-yellow: #EAB308;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #E2E8F0;
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+        }
+
+        /* ================= HEADER ================= */
+        .top-header {
+            background-color: var(--rbuu-green);
+            width: 100%;
+            max-width: 480px;
+            height: 60px;
+            position: fixed;
+            top: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 16px;
+            z-index: 1000;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-back {
+            text-decoration: none;
+            color: #FFFFFF;
+            font-weight: 600;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .header-title {
+            font-size: 15px;
+            font-weight: 800;
+            color: #FFFFFF;
+            text-align: center;
+            flex: 1;
+        }
+
+        .btn-lang {
+            background-color: #F1F5F9;
+            color: var(--rbuu-green);
+            border: none;
+            padding: 6px 10px;
+            font-size: 12px;
+            font-weight: 700;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        /* ================= CUERPO PRINCIPAL ================= */
+        .app-content {
+            width: 100%;
+            max-width: 480px;
+            background-color: var(--bg-app);
+            margin-top: 60px;
+            margin-bottom: 70px;
+            padding: 24px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            overflow-y: auto;
+        }
+
+        .module-intro h2 {
+            font-size: 18px;
+            color: var(--rbuu-green);
+            margin-bottom: 8px;
+        }
+
+        .module-intro p {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* ================= TARJETAS INTERACTIVAS ================= */
+        .interactive-card {
+            background-color: var(--bg-card);
+            border-radius: 16px;
+            padding: 24px 20px;
+            box-shadow: var(--shadow-sm);
+        }
+
+            .interactive-card h3 {
+                font-size: 15px;
+                color: var(--text-main);
+                margin-bottom: 16px;
+                text-align: center;
+            }
+
+        /* --- INTERACCIÓN 1: ERGONOMÍA --- */
+        .posture-visual {
+            background-color: #F1F5F9;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            min-height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .posture-img {
+            max-width: 100%;
+            height: 140px;
+            object-fit: contain;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .checklist-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .check-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background-color: #F8FAFC;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #E2E8F0;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+            .check-item:active {
+                transform: scale(0.98);
+            }
+
+            .check-item.done {
+                background-color: #DCFCE7;
+                border-color: var(--rbuu-green);
+            }
+
+                .check-item.done span {
+                    text-decoration: line-through;
+                    color: var(--rbuu-green);
+                    font-weight: 600;
+                }
+
+            .check-item input[type="checkbox"] {
+                width: 20px;
+                height: 20px;
+                accent-color: var(--rbuu-green);
+                pointer-events: none;
+            }
+
+            .check-item span {
+                font-size: 13px;
+                color: var(--text-main);
+            }
+
+        .success-msg {
+            display: none;
+            background-color: var(--rbuu-green);
+            color: white;
+            text-align: center;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 16px;
+            font-size: 13px;
+            font-weight: 600;
+            animation: popIn 0.4s ease;
+        }
+
+        /* --- INTERACCIÓN 2: RULETA PAUSAS ACTIVAS --- */
+        .btn-action {
+            background-color: var(--rbuu-blue);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 14px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: transform 0.1s, box-shadow 0.2s;
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+        }
+
+            .btn-action:active {
+                transform: scale(0.96);
+            }
+
+        .random-result {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #EFF6FF;
+            border: 2px dashed var(--rbuu-blue);
+            border-radius: 12px;
+            text-align: center;
+            display: none;
+        }
+
+            .random-result.show {
+                display: block;
+                animation: popIn 0.3s ease;
+            }
+
+        .result-icon {
+            font-size: 40px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .result-text {
+            font-size: 14px;
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        @keyframes popIn {
+            from {
+                transform: scale(0.9);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* ================= NAVEGACIÓN INFERIOR ================= */
+        .bottom-nav {
+            background-color: var(--bg-card);
+            width: 100%;
+            max-width: 480px;
+            height: 70px;
+            position: fixed;
+            bottom: 0;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+        }
+
+        .nav-item {
+            text-decoration: none;
+            color: var(--text-muted);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            width: 33%;
+        }
+
+            .nav-item.active {
+                color: var(--rbuu-blue);
+            }
+
+        .icon-placeholder {
+            font-size: 22px;
+            filter: grayscale(100%);
+            opacity: 0.6;
+        }
+
+        .nav-item.active .icon-placeholder {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="top-header">
+        <a href="modulos.html" class="btn-back" data-i18n="nav_volver">
+            <span style="font-size: 18px;">←</span> Volver
+        </a>
+        <h1 class="header-title" data-i18n="m2_header_title">MÓDULO 2</h1>
+        <button id="btn-traduccion" class="btn-lang" data-i18n="btn_lang">ES / EN</button>
+    </header>
+
+    <main class="app-content">
+
+        <section class="module-intro">
+            <h2 data-i18n="m2_intro_title">Hábitos & Postura</h2>
+            <p data-i18n="m2_intro_desc">Corrige tu ergonomía y mantén tu cuerpo en movimiento para evitar la fatiga durante largas sesiones de estudio.</p>
+        </section>
+
+        <!-- INTERACCIÓN 1: CHECKLIST DE ERGONOMÍA -->
+        <section class="interactive-card">
+            <h3 data-i18n="m2_i1_title">1. Tu Postura Ahora Mismo</h3>
+
+            <div class="posture-visual">
+                <img src="assets/images/posebad.png" alt="Evolución de postura" class="posture-img" id="posture-img">
+            </div>
+
+            <div class="checklist-group">
+                <div class="check-item" onclick="toggleCheck(this)">
+                    <input type="checkbox" class="posture-checkbox">
+                    <span data-i18n="m2_check_1">Espalda recta y apoyada en la silla</span>
+                </div>
+                <div class="check-item" onclick="toggleCheck(this)">
+                    <input type="checkbox" class="posture-checkbox">
+                    <span data-i18n="m2_check_2">Pies planos descansando en el suelo</span>
+                </div>
+                <div class="check-item" onclick="toggleCheck(this)">
+                    <input type="checkbox" class="posture-checkbox">
+                    <span data-i18n="m2_check_3">Pantalla a la altura de los ojos</span>
+                </div>
+            </div>
+
+            <div class="success-msg" id="posture-success" data-i18n="m2_posture_success">
+                ¡Excelente! Tu espalda te lo agradecerá. ✨
+            </div>
+        </section>
+
+        <!-- INTERACCIÓN 2: RULETA DE PAUSAS ACTIVAS -->
+        <section class="interactive-card" style="border-top: 5px solid var(--rbuu-blue);">
+            <h3 data-i18n="m2_i2_title">2. Ruleta de Pausas Activas</h3>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px; text-align: center;" data-i18n="m2_roulette_desc">
+                ¿Llevas mucho tiempo sentado? Deja que la app elija un estiramiento rápido para ti.
+            </p>
+
+            <button class="btn-action" id="btn-roulette" data-i18n="m2_btn_roulette">Generar Estiramiento 🎲</button>
+
+            <div class="random-result" id="random-result">
+                <span class="result-icon" id="result-icon">🧘</span>
+                <p class="result-text" id="result-text"></p> <!-- El data-i18n se inyecta con JS -->
+            </div>
+        </section>
+
+    </main>
+
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <span class="icon-placeholder">🏠</span>
+            <span style="font-size: 10px; font-weight: 600; margin-top: 4px;" data-i18n="nav_inicio">Inicio</span>
+        </a>
+        <a href="modulos.html" class="nav-item active">
+            <span class="icon-placeholder">📚</span>
+            <span style="font-size: 10px; font-weight: 600; margin-top: 4px;" data-i18n="nav_modulos">Módulos</span>
+        </a>
+        <a href="creditos.html" class="nav-item">
+            <span class="icon-placeholder">ℹ️</span>
+            <span style="font-size: 10px; font-weight: 600; margin-top: 4px;" data-i18n="nav_creditos">Créditos</span>
+        </a>
+    </nav>
+
+    <!-- SCRIPTS -->
+    <script src="traduccion.js"></script>
+    <script>
+        // --- Lógica de la Postura (Checklist) ---
+        function toggleCheck(element) {
+            const checkbox = element.querySelector('input');
+            checkbox.checked = !checkbox.checked;
+
+            if (checkbox.checked) {
+                element.classList.add('done');
+            } else {
+                element.classList.remove('done');
+            }
+
+            actualizarPostura();
+        }
+
+        function actualizarPostura() {
+            const checkboxes = document.querySelectorAll('.posture-checkbox');
+            let marcados = 0;
+
+            checkboxes.forEach(cb => {
+                if (cb.checked) marcados++;
+            });
+
+            const img = document.getElementById('posture-img');
+            const msg = document.getElementById('posture-success');
+
+            img.style.opacity = '0.5';
+
+            setTimeout(() => {
+                if (marcados === 0) {
+                    img.src = "assets/images/posebad.png";
+                    msg.style.display = 'none';
+                } else if (marcados === 1) {
+                    img.src = "assets/images/posemed.png";
+                    msg.style.display = 'none';
+                } else if (marcados === 2) {
+                    img.src = "assets/images/posewell.png";
+                    msg.style.display = 'none';
+                } else if (marcados === 3) {
+                    img.src = "assets/images/posegood.png";
+                    msg.style.display = 'block';
+                }
+                img.style.opacity = '1';
+            }, 150);
+        }
+
+        // --- Lógica de la Ruleta de Pausas Activas ---
+        document.addEventListener('DOMContentLoaded', () => {
+            localStorage.setItem('ultimoModuloGuardado', 'modulo2.html');
+
+            // En vez de texto, guardamos la clave de traducción correspondiente
+            const ejercicios = [
+                { icon: "🔄", i18n: "m2_ex_1" },
+                { icon: "🤷", i18n: "m2_ex_2" },
+                { icon: "👋", i18n: "m2_ex_3" },
+                { icon: "🪑", i18n: "m2_ex_4" },
+                { icon: "🧘", i18n: "m2_ex_5" },
+                { icon: "👀", i18n: "m2_ex_6" }
+            ];
+
+            const btnRoulette = document.getElementById('btn-roulette');
+            const resultBox = document.getElementById('random-result');
+            const resultIcon = document.getElementById('result-icon');
+            const resultText = document.getElementById('result-text');
+
+            btnRoulette.addEventListener('click', () => {
+                resultBox.classList.remove('show');
+
+                setTimeout(() => {
+                    const aleatorio = ejercicios[Math.floor(Math.random() * ejercicios.length)];
+                    resultIcon.textContent = aleatorio.icon;
+
+                    // Inyecta el atributo i18n y fuerza la traducción
+                    resultText.setAttribute('data-i18n', aleatorio.i18n);
+                    if (typeof aplicarIdioma === "function") aplicarIdioma();
+
+                    resultBox.classList.add('show');
+                }, 50);
+            });
+        });
+    </script>
+</body>
+</html>
