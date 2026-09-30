@@ -164,7 +164,7 @@
         "m5_circle_exhale": "Exhala...",
         "m5_btn_breathe_start": "🌬️ Empezar Ejercicio",
         "m5_btn_breathe_stop": "⏹️ Detener",
-        "m5_player_title": "🎧 Focus Audio (Música Chill)",
+        "m5_player_title": "🎧 Música relajante para concentrarse",
 
         "m5_i2_title": "2. Quiz: Tu Perfil de Apoyo",
         "m5_i2_desc": "Descubre cómo manejas la presión respondiendo 3 preguntas honestas.",
