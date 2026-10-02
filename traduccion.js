@@ -208,6 +208,7 @@
         "c_c3_ref3": "<strong>Procrastinación:</strong><br>Steel, P. (2007). The nature of procrastination: A meta-analytic and theoretical review of quintessential self-regulatory failure. <em>Psychological Bulletin</em>, 133(1), 65-94.",
 
         //TEXTOS INTRO Y PERFIL ESPAÑOL//
+        "intro_slogan": "Tu espacio de bienestar y organización universitaria",
         "intro_entrar": "COMENZAR",
         "p_header": "MI PERFIL",
         "p_title": "Personaliza tu experiencia",
@@ -427,6 +428,7 @@
         "c_c3_ref3": "<strong>Procrastination:</strong><br>Steel, P. (2007). The nature of procrastination: A meta-analytic and theoretical review of quintessential self-regulatory failure. <em>Psychological Bulletin</em>, 133(1), 65-94.",
 
         //TEXTOS INTRO Y PERFIL INGLES//
+        "intro_slogan": "Your space for university wellness and organization",
         "intro_entrar": "START",
         "p_header": "MY PROFILE",
         "p_title": "Customize your experience",
